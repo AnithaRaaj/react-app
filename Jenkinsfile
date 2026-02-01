@@ -15,7 +15,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("AnithaRaaj/react-app")
+                    app = docker.build("anitharaaj/react-app")
                     app.inside {
                         sh 'echo $(curl localhost:1233)'
                     }
@@ -41,14 +41,14 @@ pipeline {
             }
             steps {
                     script {
-                        sh "docker pull AnithaRaaj/react-app:${env.BUILD_NUMBER}"
+                        sh "docker pull anitharaaj/react-app:${env.BUILD_NUMBER}"
                         try {
                             sh "docker stop react-app"
                             sh "docker rm react-app"
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "docker run --restart always --name react-app -p 1233:80 -d AnithaRaaj/react-app:${env.BUILD_NUMBER}"
+                        sh "docker run --restart always --name react-app -p 1233:80 -d anitharaaj/react-app:${env.BUILD_NUMBER}"
                     }
             }
         }
@@ -80,7 +80,7 @@ pipeline {
                 input 'Does the staging environment look OK? Did You get 200 response?'
                  milestone(1)
                     script {
-                        sh "docker pull AnithaRaaj/react-app:${env.BUILD_NUMBER}"
+                        sh "docker pull anitharaaj/react-app:${env.BUILD_NUMBER}"
                         try {
                             sh "docker stop react-app"
                             sh "docker rm react-app"
